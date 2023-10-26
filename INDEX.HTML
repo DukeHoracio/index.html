@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .thumbnailPic {
+            border: 0;
+            border-radius: 0%;
+        }
+        
+        .thumbnailPic.selected {
+            border: 10px solid #8a4419;
+            border-radius: 30%;
+        }
+
+        .thumbnailPic img {
+            border-radius: 30%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<table style="width:500px">
+    <tr>
+        <td>
+            <a href="#" class="thumbnailPic" data-image-src="image1.jpg" data-description="data1.txt">
+                <img src="image1.jpg" />
+            </a>
+        </td>
+        <td>
+            <img src="image1B.jpg" id="img1B" />
+            <div id="description"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#" class="thumbnailPic" data-image-src="image2.jpg" data-description="data2.txt">
+                <img src="image2.jpg" />
+            </a>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#" class="thumbnailPic" data-image-src="image3.jpg" data-description="data3.txt">
+                <img src="image3.jpg" />
+            </a>
+        </td>
+        <td></td>
+    </tr>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $("a.thumbnailPic").mouseenter(function () {
+            var imgSrc = $(this).data("image-src");
+            $("#img1B").attr("src", imgSrc);
+
+            // Remove the 'selected' class from all thumbnailPics
+            $("a.thumbnailPic").removeClass("selected");
+
+            // Add the 'selected' class to the hovered thumbnailPic
+            $(this).addClass("selected");
+
+            var descriptionFile = $(this).data("description");
+
+            // Use the .load() method to load the description text into the #description element
+            $("#description").load(descriptionFile);
+        });
+    });
+</script>
+
+</body>
+</html>
